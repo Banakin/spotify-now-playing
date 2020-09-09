@@ -33,7 +33,7 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Authorizat
 
 * Register on [Vercel](https://vercel.com/)
 
-* Create project linked to your github repo
+* Fork this repo, then create a vercel project linked to it
 
 * Add Environment Variables:
     * `https://vercel.com/<YourName>/<ProjectName>/settings/environment-variables`
@@ -51,6 +51,38 @@ You can now use the following in your readme:
 
 ## Customization
 
-If you want a distinction between the widget showing your currently playing, and your recently playing, you can hide the EQ bar when you're not actively listening.
+If you want a distinction between the widget showing your currently playing, and your recently playing:
+
+### Hide the EQ bar
 
 Remove the `#` in front of `contentBar` in [line 81](https://github.com/novatorem/novatorem/blob/98ba4a8489ad86f5f73e95088e620e8859d28e71/api/spotify.py#L81) of current master, then the EQ bar will be hidden when you're in not currently playing anything.
+
+### Status String
+
+Have a string saying either "Vibing to:" or "Last seen playing:".
+
+* Change [`height` to `height + 40`](https://github.com/novatorem/novatorem/blob/5194a689253ee4c89a9d365260d6050923d93dd5/api/templates/spotify.html.j2#L1-L2) (or whatever `margin-top` is set to)
+* Uncomment [**.main**'s `margin-top`](https://github.com/novatorem/novatorem/blob/5194a689253ee4c89a9d365260d6050923d93dd5/api/templates/spotify.html.j2#L10)
+* Uncomment [currentStatus](https://github.com/novatorem/novatorem/blob/5194a689253ee4c89a9d365260d6050923d93dd5/api/templates/spotify.html.j2#L93)
+
+## Requests
+
+Customization requests can be submitted as an issue, like https://github.com/novatorem/novatorem/issues/2
+
+If you want to share your own customization options, open a PR if it's done or open an issue if you want it implemented by someone else.
+
+## Debugging
+
+If you have issues setting up, try following this [guide](https://youtu.be/n6d4KHSKqGk?t=615).
+
+Followed the guide and still having problems?
+Try checking out the functions tab in vercel, linked as:
+```https://vercel.com/{name}/spotify/{build}/functions``` 
+
+<details><summary>Which looks like-</summary>
+
+![image](https://user-images.githubusercontent.com/16753077/91338931-b0326680-e7a3-11ea-8178-5499e0e73250.png)
+
+</details><br>
+
+You will see a log there, and most issues can be resolved by ensuring you have the correct variables from setup.
